@@ -17,7 +17,7 @@ const SetupPage = async () => {
     },
   });
 
-  //   if server found then redirect user to that vary server
+  //   if server found then redirect user to that server page
   if (server) {
     return redirect(`/servers/${server.id}`);
   }
