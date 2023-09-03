@@ -3,7 +3,6 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
 import axios from "axios";
 
 import {
@@ -30,6 +29,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
+import { useModal } from "@/hooks/use-modal-store";
 
 // Defining zod schema for the validation of the form inputs
 const formSchema = z.object({
@@ -43,13 +43,11 @@ const formSchema = z.object({
 
 // this is same as making useState for the form inputs
 // useForm is a custom hook for managing forms with ease. It takes one object as optional argument.
-export const InitialModal = () => {
-  const [isMounted, setIsMounted] = useState(false); // to overcome hydration errors as when modal are displayed to UI they cause Hydration errors
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
+export const CreateServerModal = () => {
+  const { isOpen, onClose, type } = useModal();
   const router = useRouter();
+
+  const isModalOpen = isOpen && type === "createServer";
 
   const form = useForm({
     resolver: zodResolver(formSchema), // here we pass the resolver with formSchema for validations
@@ -67,19 +65,19 @@ export const InitialModal = () => {
 
       form.reset();
       router.refresh();
-      window.location.reload();
+      onClose();
     } catch (error) {
       console.log(error);
     }
   };
 
-  // to overcome hydration errors as when modal are displayed to UI they cause Hydration errors
-  if (!isMounted) {
-    return null;
-  }
+  const handleClose = () => {
+    form.reset();
+    onClose();
+  };
 
   return (
-    <Dialog open={true}>
+    <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
