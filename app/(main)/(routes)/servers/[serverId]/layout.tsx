@@ -14,6 +14,8 @@ const ServerIdLayout = async ({
 }) => {
   const profile = await currentProfile();
 
+  console.log("profile" , profile);
+
   if (!profile) {
     return redirectToSignIn();
   }
