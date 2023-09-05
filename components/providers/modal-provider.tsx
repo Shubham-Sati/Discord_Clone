@@ -7,6 +7,8 @@ import { InviteModal } from "@/components/modals/invite-modal";
 import { EditServerModal } from "@/components/modals/edit-server-modal";
 import { MembersModal } from "@/components/modals/members-modal";
 import { CreateChannelModal } from "@/components/modals/create-channel-modal";
+import { LeaveServerModal } from "@/components/modals/leave-server-modal";
+import { DeleteServerModal } from "@/components/modals/delete-server-modal copy";
 
 export const ModalProvider = () => {
   // these isMounted , useEffect is used to prevent the modals to render on the server side because it can cause inconsistency thus creating hydration errors
@@ -28,6 +30,8 @@ export const ModalProvider = () => {
       <EditServerModal />
       <MembersModal />
       <CreateChannelModal />
+      <LeaveServerModal />
+      <DeleteServerModal />
     </React.Fragment>
   );
 };
