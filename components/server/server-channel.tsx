@@ -35,6 +35,9 @@ export const ServerChannel = ({
     router.push(`/servers/${params?.serverId}/channels/${channel.id}`);
   };
 
+  // This below code ( onAction ) is done because
+  // onClick on the button overrides onClick on the edit and delete buttons
+  // theirfore to stop that we need to this code and add this onAction instead of onClick in edit and delete
   const onAction = (e: React.MouseEvent, action: ModalType) => {
     e.stopPropagation();
     onOpen(action, { channel, server });
@@ -65,7 +68,6 @@ export const ServerChannel = ({
           <ActionTooltip label="Edit">
             <Edit
               onClick={(e) => onAction(e, "editChannel")}
-              // onClick={() => onOpen("editChannel", { server, channel })}
               className="hidden group-hover:block w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
             />
           </ActionTooltip>
@@ -73,7 +75,6 @@ export const ServerChannel = ({
           <ActionTooltip label="Delete">
             <Trash
               onClick={(e) => onAction(e, "deleteChannel")}
-              // onClick={() => onOpen("deleteChannel", { server, channel })}
               className="hidden group-hover:block w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
             />
           </ActionTooltip>
