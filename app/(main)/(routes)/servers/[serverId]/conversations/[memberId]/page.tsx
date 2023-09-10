@@ -7,7 +7,7 @@ import { currentProfile } from "@/lib/current-profile";
 import { ChatHeader } from "@/components/chat/chat-header";
 import { ChatMessages } from "@/components/chat/chat-messages";
 import { ChatInput } from "@/components/chat/chat-input";
-// import { MediaRoom } from "@/components/media-room";
+import { MediaRoom } from "@/components/media-room";
 
 interface MemberIdPageProps {
   params: {
@@ -63,13 +63,10 @@ const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
         type="conversation"
       />
 
-      {/* {searchParams.video && (
-        <MediaRoom
-          chatId={conversation.id}
-          video={true}
-          audio={true}
-        />
-      )} */}
+      {/* when video button is clicked it append video-true in the url and if video is their in the url the open media room (below code) */}
+      {searchParams.video && (
+        <MediaRoom chatId={conversation.id} video={true} audio={true} />
+      )}
 
       {/* Chat messages and chat input */}
       {!searchParams.video && (
