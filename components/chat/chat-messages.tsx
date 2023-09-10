@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useRef, ElementRef } from "react";
-// import { format } from "date-fns";
+import { format } from "date-fns";
 import { Member, Message, Profile } from "@prisma/client";
 import { Loader2, ServerCrash } from "lucide-react";
 
@@ -121,8 +121,7 @@ export const ChatMessages = ({
                 content={message.content}
                 fileUrl={message.fileUrl}
                 deleted={message.deleted}
-                // timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
-                timestamp={"null"}
+                timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
                 isUpdated={message.updatedAt !== message.createdAt}
                 socketUrl={socketUrl}
                 socketQuery={socketQuery}
