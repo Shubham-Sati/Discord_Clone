@@ -6,8 +6,8 @@ import { Member, Message, Profile } from "@prisma/client";
 import { Loader2, ServerCrash } from "lucide-react";
 
 import { useChatQuery } from "@/hooks/use-chat-query";
-// import { useChatSocket } from "@/hooks/use-chat-socket";
-// import { useChatScroll } from "@/hooks/use-chat-scroll";
+import { useChatSocket } from "@/hooks/use-chat-socket";
+import { useChatScroll } from "@/hooks/use-chat-scroll";
 
 import { ChatWelcome } from "./chat-welcome";
 import { ChatItem } from "./chat-item";
@@ -58,14 +58,14 @@ export const ChatMessages = ({
       paramValue,
     });
 
-  //   useChatSocket({ queryKey, addKey, updateKey });
-  //   useChatScroll({
-  //     chatRef,
-  //     bottomRef,
-  //     loadMore: fetchNextPage,
-  //     shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
-  //     count: data?.pages?.[0]?.items?.length ?? 0,
-  //   })
+  useChatSocket({ queryKey, addKey, updateKey });
+  useChatScroll({
+    chatRef,
+    bottomRef,
+    loadMore: fetchNextPage,
+    shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
+    count: data?.pages?.[0]?.items?.length ?? 0,
+  });
 
   if (status === "loading") {
     return (
@@ -95,7 +95,7 @@ export const ChatMessages = ({
       {!hasNextPage && <ChatWelcome type={type} name={name} />}
 
       {/* Loading messages */}
-      {/* {hasNextPage && (
+      {hasNextPage && (
         <div className="flex justify-center">
           {isFetchingNextPage ? (
             <Loader2 className="h-6 w-6 text-zinc-500 animate-spin my-4" />
@@ -108,7 +108,7 @@ export const ChatMessages = ({
             </button>
           )}
         </div>
-      )} */}
+      )}
       <div className="flex flex-col-reverse mt-auto">
         {data?.pages?.map((group, i) => (
           <Fragment key={i}>
@@ -130,7 +130,7 @@ export const ChatMessages = ({
           </Fragment>
         ))}
       </div>
-      {/* <div ref={bottomRef} /> */}
+      <div ref={bottomRef} />
     </div>
   );
 };
