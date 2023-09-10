@@ -94,7 +94,7 @@ export const ChatMessages = ({
       {!hasNextPage && <div className="flex-1" />}
       {!hasNextPage && <ChatWelcome type={type} name={name} />}
 
-      {/* Loading messages */}
+      {/* Loading old messages on the top */}
       {hasNextPage && (
         <div className="flex justify-center">
           {isFetchingNextPage ? (
