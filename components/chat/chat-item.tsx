@@ -57,8 +57,6 @@ export const ChatItem = ({
   socketQuery,
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-
   const { onOpen } = useModal();
   const params = useParams();
   const router = useRouter();
