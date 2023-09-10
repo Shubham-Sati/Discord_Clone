@@ -1,3 +1,4 @@
+// this hook is used to load previous messages automatically when we scroll up
 import { useEffect, useState } from "react";
 
 type ChatScrollProps = {
